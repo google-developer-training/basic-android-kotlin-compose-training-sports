@@ -307,7 +307,7 @@ private fun SportsListAndDetail(
     }
 }
 
-@Preview()
+@Preview(showBackground = true)
 @Composable
 fun SportsListItemPreview() {
     SportsTheme {
@@ -318,7 +318,7 @@ fun SportsListItemPreview() {
     }
 }
 
-@Preview()
+@Preview(showBackground = true)
 @Composable
 fun SportsListPreview() {
     SportsTheme() {
@@ -331,7 +331,7 @@ fun SportsListPreview() {
     }
 }
 
-@Preview()
+@Preview(showBackground = true, widthDp = 1000)
 @Composable
 fun SportsListAndDetailsPreview() {
     SportsTheme() {
