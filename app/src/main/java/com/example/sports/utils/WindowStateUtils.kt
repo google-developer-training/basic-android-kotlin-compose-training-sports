@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2022 The Android Open Source Project
+ * Copyright 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      https://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-package com.example.sports.ui.theme
+package com.example.sports.utils
 
-import androidx.compose.ui.graphics.Color
-
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
-val Gray500 = Color(0xFF888888)
-val Gray200 = Color(0xFFCCCCCC)
-val White500 = Color(0xFFFFFFFF)
+/**
+ * Content shown depending on size and state of device.
+ */
+enum class SportsContentType {
+    ListOnly, ListAndDetail
+}

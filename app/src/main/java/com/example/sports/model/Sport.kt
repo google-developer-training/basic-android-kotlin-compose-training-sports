@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      https://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,15 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.example.sports.model
 
-package com.example.sports.ui.theme
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 
-import androidx.compose.ui.graphics.Color
-
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
-val Gray500 = Color(0xFF888888)
-val Gray200 = Color(0xFFCCCCCC)
-val White500 = Color(0xFFFFFFFF)
+/**
+ * Data model for Sport
+ */
+data class Sport(
+    val id: Int,
+    @StringRes val titleResourceId: Int,
+    @StringRes val subtitleResourceId: Int,
+    @DrawableRes val imageResourceId: Int,
+    @DrawableRes val sportsImageBanner: Int,
+    @StringRes val newsDetails: Int
+)

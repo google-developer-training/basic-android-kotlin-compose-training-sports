@@ -16,4 +16,39 @@
 
 <resources>
     <string name="app_name">Sports</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="list_fragment_label">Sports</string>
+    <string name="news_fragment_label">Sports News</string>
+
+    <string name="news_title">News</string>
+    <string name="sports_news_detail_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Praesent ultrices congue rutrum. Phasellus elementum ipsum ac convallis aliquam. Suspendisse
+        eleifend eros a enim faucibus mollis. Nunc placerat, est vitae vestibulum blandit, dolor
+        diam fringilla tellus, eu euismod mauris neque at neque.</string>
+    />
+
+    <string name="baseball">Baseball</string>
+    <string name="badminton">Badminton</string>
+    <string name="basketball">Basketball</string>
+    <string name="bowling">Bowling</string>
+    <string name="cycling">Cycling</string>
+    <string name="golf">Golf</string>
+    <string name="running">Running</string>
+    <string name="soccer">Soccer</string>
+    <string name="swimming">Swimming</string>
+    <string name="table_tennis">Table Tennis</string>
+    <string name="tennis">Tennis</string>
+
+    <string name="baseball_subtitle">Here is some Baseball news!</string>
+    <string name="badminton_subtitle">Here is some Badminton news!</string>
+    <string name="basketball_subtitle">Here is some Basketball news!</string>
+    <string name="bowling_subtitle">Here is some Bowling news!</string>
+    <string name="cycling_subtitle">Here is some Cycling news!</string>
+    <string name="golf_subtitle">Here is some Golf news!</string>
+    <string name="running_subtitle">Here is some Running news!</string>
+    <string name="soccer_subtitle">Here is some Soccer news!</string>
+    <string name="swimming_subtitle">Here is some Swimming news!</string>
+    <string name="table_tennis_subtitle">Here is some Table Tennis news!</string>
+    <string name="tennis_subtitle">Here is some Tennis news!</string>
+    <string name="back_button">Back</string>
 </resources>
