@@ -19,18 +19,31 @@ package com.example.sports.ui
 import android.app.Activity
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -51,15 +64,21 @@ import com.example.sports.utils.SportsContentType
 @Composable
 fun SportsApp(
     windowSize: WindowWidthSizeClass,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     val viewModel: SportsViewModel = viewModel()
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState = viewModel.uiState.collectAsState().value
     val contentType = when (windowSize) {
         WindowWidthSizeClass.Compact,
-        WindowWidthSizeClass.Medium -> SportsContentType.ListOnly
-        WindowWidthSizeClass.Expanded -> SportsContentType.ListAndDetail
-        else -> SportsContentType.ListOnly
+        WindowWidthSizeClass.Medium -> {
+            SportsContentType.ListOnly
+        }
+        WindowWidthSizeClass.Expanded -> {
+            SportsContentType.ListAndDetail
+        }
+        else -> {
+            SportsContentType.ListOnly
+        }
     }
 
     Scaffold(
@@ -113,7 +132,8 @@ fun SportsAppBar(
     windowSize: WindowWidthSizeClass,
     modifier: Modifier = Modifier
 ) {
-    val isShowingDetailPage = windowSize != WindowWidthSizeClass.Expanded && !isShowingListPage
+    val isShowingDetailPage = windowSize != WindowWidthSizeClass.Expanded
+        && !isShowingListPage
     TopAppBar(
         title = {
             Text(
@@ -124,7 +144,8 @@ fun SportsAppBar(
                 }
             )
         },
-        navigationIcon = if (isShowingDetailPage) {
+        navigationIcon =
+        if (isShowingDetailPage) {
             {
                 IconButton(onClick = onBackButtonClick) {
                     Icon(
@@ -150,12 +171,14 @@ private fun SportsListItem(
     Card(
         elevation = 2.dp,
         modifier = modifier,
-        onClick = { onItemClick(sport) }
+        onClick = {
+            onItemClick(sport)
+        }
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 150.dp)
+                .size(150.dp)
         ) {
             SportsListImageItem(sport)
             Column(
@@ -189,8 +212,8 @@ private fun SportsListItem(
 private fun SportsListImageItem(sport: Sport, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
-            .width(170.dp)
-            .fillMaxHeight()
+            .size(150.dp)
+            .clip(MaterialTheme.shapes.small)
     ) {
         Image(
             painter = painterResource(sport.imageResourceId),
@@ -207,14 +230,11 @@ private fun SportsList(
     onClick: (Sport) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = modifier
-    ) {
-        items(sports, key = { sport -> sport.id }) { sport ->
+    LazyColumn(modifier = modifier) {
+        items(sports) { sport ->
             SportsListItem(
                 sport = sport,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 onItemClick = onClick
             )
         }
