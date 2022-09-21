@@ -1,5 +1,5 @@
 ---
-name: Practice problems Sports App issue template
+name: 'Practice problems Sports App issue template '
 about: Issue template for Sports app practice problem
 title: 'Practice problem Sports app: Android Basics with Compose'
 labels: ''
