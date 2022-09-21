@@ -1,7 +1,7 @@
 ---
 name: Practice problems Sports App issue template
 about: Issue template for Sports app practice problem
-title: ''
+title: 'Practice problem Sports app: Android Basics with Compose'
 labels: ''
 assignees: ''
 
