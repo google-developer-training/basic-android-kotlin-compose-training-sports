@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 The Android Open Source Project
+ * Copyright (c) 2023 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,6 +51,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -179,13 +180,13 @@ private fun SportsListItem(
     Card(
         elevation = CardDefaults.cardElevation(),
         modifier = modifier,
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(dimensionResource(R.dimen.card_corner_radius)),
         onClick = { onItemClick(sport) }
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .size(128.dp)
+                .size(dimensionResource(R.dimen.card_image_height))
         ) {
             SportsListImageItem(
                 sport = sport,
@@ -193,15 +194,15 @@ private fun SportsListItem(
             Column(
                 modifier = Modifier
                     .padding(
-                        vertical = 8.dp,
-                        horizontal = 16.dp
+                        vertical = dimensionResource(R.dimen.padding_small),
+                        horizontal = dimensionResource(R.dimen.padding_medium)
                     )
                     .weight(1f)
             ) {
                 Text(
                     text =  stringResource(sport.titleResourceId),
                     style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.padding(bottom = 4.dp)
+                    modifier = Modifier.padding(bottom = dimensionResource(R.dimen.card_text_vertical_space))
                 )
                 Text(
                     text = stringResource(sport.subtitleResourceId),
@@ -234,7 +235,7 @@ private fun SportsListItem(
 private fun SportsListImageItem(sport: Sport, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
-            .size(128.dp)
+            .size(dimensionResource(R.dimen.card_image_height))
     ) {
         Image(
             painter = painterResource(sport.imageResourceId),
@@ -252,8 +253,8 @@ private fun SportsList(
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(dimensionResource(R.dimen.padding_medium)),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
         modifier = modifier
     ) {
         items(sports, key = { sport -> sport.id }) { sport ->
@@ -280,7 +281,7 @@ private fun SportsDetail(
     Box(
         modifier = Modifier
             .verticalScroll(state = scrollState)
-            .padding(top = 64.dp)
+            .padding(top = dimensionResource(R.dimen.topappbar_height))
     ) {
         Column(
 
@@ -313,10 +314,10 @@ private fun SportsDetail(
                         style = MaterialTheme.typography.headlineLarge,
                         color = MaterialTheme.colorScheme.inverseOnSurface,
                         modifier = Modifier
-                            .padding(horizontal = 8.dp)
+                            .padding(horizontal = dimensionResource(R.dimen.padding_small))
                     )
                     Row(
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(dimensionResource(R.dimen.padding_small))
                     ) {
                         Text(
                             text = pluralStringResource(R.plurals.player_count_caption, selectedSport.playerCount, selectedSport.playerCount),
@@ -336,8 +337,8 @@ private fun SportsDetail(
                 text = stringResource(selectedSport.sportDetails),
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(
-                    vertical = 24.dp,
-                    horizontal = 40.dp
+                    vertical = dimensionResource(R.dimen.padding_detail_content_vertical),
+                    horizontal = dimensionResource(R.dimen.padding_detail_content_horizontal)
                 )
             )
         }
