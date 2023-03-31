@@ -73,7 +73,6 @@ import com.example.sports.utils.SportsContentType
 @Composable
 fun SportsApp(
     windowSize: WindowWidthSizeClass,
-    modifier: Modifier = Modifier,
 ) {
     val viewModel: SportsViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
@@ -100,7 +99,9 @@ fun SportsApp(
                 onClick = {
                     viewModel.updateCurrentSport(it)
                 },
-                modifier = modifier.padding((innerPadding))
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding((innerPadding))
             )
         } else {
             if (uiState.isShowingListPage) {
@@ -110,12 +111,12 @@ fun SportsApp(
                         viewModel.updateCurrentSport(it)
                         viewModel.navigateToDetailPage()
                     },
-                    modifier = modifier.padding((innerPadding))
+                    modifier = Modifier.padding((innerPadding))
                 )
             } else {
                 SportsDetail(
                     selectedSport = uiState.currentSport,
-                    modifier = modifier.padding((innerPadding)),
+                    modifier = Modifier.padding((innerPadding)),
                     onBackPressed = {
                         viewModel.navigateToListPage()
                     }
@@ -190,6 +191,7 @@ private fun SportsListItem(
         ) {
             SportsListImageItem(
                 sport = sport,
+                modifier = Modifier.size(dimensionResource(R.dimen.card_image_height))
             )
             Column(
                 modifier = Modifier
@@ -210,7 +212,6 @@ private fun SportsListItem(
                     color = MaterialTheme.colorScheme.secondary,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 3
-//                    modifier = Modifier.
                 )
                 Spacer(Modifier.weight(1f))
                 Row {
@@ -235,7 +236,6 @@ private fun SportsListItem(
 private fun SportsListImageItem(sport: Sport, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
-            .size(dimensionResource(R.dimen.card_image_height))
     ) {
         Image(
             painter = painterResource(sport.imageResourceId),
@@ -279,15 +279,11 @@ private fun SportsDetail(
     val scrollState = rememberScrollState()
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .verticalScroll(state = scrollState)
-            .padding(top = dimensionResource(R.dimen.topappbar_height))
     ) {
-        Column(
-
-        ) {
+        Column {
             Box {
-
                 Box() {
                     Image(
                         painter = painterResource(selectedSport.sportsImageBanner),
@@ -353,17 +349,17 @@ private fun SportsListAndDetail(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
     ) {
         SportsList(
             sports = sports,
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.weight(2f),
             onClick = onClick
         )
         val activity = (LocalContext.current as Activity)
         SportsDetail(
             selectedSport = selectedSport,
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.weight(3f),
             onBackPressed = { activity.finish() }
         )
     }
@@ -403,7 +399,8 @@ fun SportsListAndDetailsPreview() {
                 selectedSport = LocalSportsDataProvider.getSportsData().getOrElse(0) {
                     LocalSportsDataProvider.defaultSport
                 },
-                onClick = {}
+                onClick = {},
+                modifier = Modifier.fillMaxWidth()
             )
         }
     }
