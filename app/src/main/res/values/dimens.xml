@@ -10,6 +10,6 @@
     <dimen name="padding_detail_content_horizontal">40dp</dimen>
     <dimen name="padding_detail_content_vertical">24dp</dimen>
 
-    <dimen name="topappbar_height">64.dp</dimen>
+    <dimen name="topappbar_height">64dp</dimen>
 
 </resources>
