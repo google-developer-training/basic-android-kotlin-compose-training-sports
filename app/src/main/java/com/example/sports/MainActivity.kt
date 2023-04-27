@@ -36,10 +36,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             SportsTheme {
                 Surface {
-                    val windowSize = calculateWindowSizeClass(this)
-                    SportsApp(
-                        windowSize = windowSize.widthSizeClass,
-                    )
+                    SportsApp()
                 }
             }
         }
