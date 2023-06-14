@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 
-
 package com.example.sports.data
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import com.example.sports.R
 import com.example.sports.model.Sport
 
