@@ -65,6 +65,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.sports.R
 import com.example.sports.data.LocalSportsDataProvider
@@ -106,9 +107,9 @@ fun SportsApp(
                 onClick = {
                     viewModel.updateCurrentSport(it)
                 },
+                contentPadding = innerPadding,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding((innerPadding))
             )
         } else {
             if (uiState.isShowingListPage) {
@@ -118,12 +119,12 @@ fun SportsApp(
                         viewModel.updateCurrentSport(it)
                         viewModel.navigateToDetailPage()
                     },
-                    modifier = Modifier.padding((innerPadding))
+                    contentPadding = innerPadding
                 )
             } else {
                 SportsDetail(
                     selectedSport = uiState.currentSport,
-                    modifier = Modifier.padding((innerPadding)),
+                    contentPadding = innerPadding,
                     onBackPressed = {
                         viewModel.navigateToListPage()
                     }
@@ -257,10 +258,16 @@ private fun SportsListImageItem(sport: Sport, modifier: Modifier = Modifier) {
 private fun SportsList(
     sports: List<Sport>,
     onClick: (Sport) -> Unit,
+    contentPadding: PaddingValues,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
-        contentPadding = PaddingValues(dimensionResource(R.dimen.padding_medium)),
+        contentPadding = PaddingValues(
+            top = contentPadding.calculateTopPadding() + dimensionResource(R.dimen.padding_medium),
+            bottom = contentPadding.calculateBottomPadding() + dimensionResource(R.dimen.padding_medium),
+            start = dimensionResource(R.dimen.padding_medium),
+            end = dimensionResource(R.dimen.padding_medium)
+        ),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
         modifier = modifier
     ) {
@@ -278,6 +285,7 @@ private fun SportsList(
 private fun SportsDetail(
     selectedSport: Sport,
     onBackPressed: () -> Unit,
+    contentPadding: PaddingValues,
     modifier: Modifier = Modifier
 ) {
     BackHandler {
@@ -287,9 +295,20 @@ private fun SportsDetail(
 
     Box(
         modifier = modifier
+            .padding(
+                PaddingValues(
+                    top = contentPadding.calculateTopPadding(),
+                    bottom = 0.dp,
+                    start = 0.dp,
+                    end = 0.dp
+                )
+            )
             .verticalScroll(state = scrollState)
     ) {
-        Column {
+        Column(
+            modifier = Modifier
+                .padding(bottom = contentPadding.calculateBottomPadding())
+        ) {
             Box {
                 Box() {
                     Image(
@@ -311,7 +330,6 @@ private fun SportsDetail(
                             )
                         )
                 ) {
-
                     Text(
                         text = stringResource(selectedSport.titleResourceId),
                         style = MaterialTheme.typography.headlineLarge,
@@ -353,6 +371,7 @@ private fun SportsListAndDetail(
     sports: List<Sport>,
     selectedSport: Sport,
     onClick: (Sport) -> Unit,
+    contentPadding: PaddingValues,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -360,12 +379,14 @@ private fun SportsListAndDetail(
     ) {
         SportsList(
             sports = sports,
+            contentPadding = contentPadding,
             modifier = Modifier.weight(2f),
             onClick = onClick
         )
         val activity = (LocalContext.current as Activity)
         SportsDetail(
             selectedSport = selectedSport,
+            contentPadding = contentPadding,
             modifier = Modifier.weight(3f),
             onBackPressed = { activity.finish() }
         )
@@ -390,6 +411,7 @@ fun SportsListPreview() {
         Surface {
             SportsList(
                 sports = LocalSportsDataProvider.getSportsData(),
+                contentPadding = PaddingValues(0.dp),
                 onClick = {}
             )
         }
@@ -407,6 +429,7 @@ fun SportsListAndDetailsPreview() {
                     LocalSportsDataProvider.defaultSport
                 },
                 onClick = {},
+                contentPadding = PaddingValues(0.dp),
                 modifier = Modifier.fillMaxWidth()
             )
         }
