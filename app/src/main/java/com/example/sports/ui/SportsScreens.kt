@@ -16,7 +16,6 @@
 
 package com.example.sports.ui
 
-import android.app.Activity
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -58,7 +57,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -66,6 +64,7 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -82,12 +81,14 @@ import com.example.sports.utils.SportsContentType
 @Composable
 fun SportsApp(
     windowSize: WindowWidthSizeClass,
+    onBackPressed: () -> Unit,
 ) {
     val viewModel: SportsViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
     val contentType = when (windowSize) {
         WindowWidthSizeClass.Compact,
         WindowWidthSizeClass.Medium -> SportsContentType.ListOnly
+
         WindowWidthSizeClass.Expanded -> SportsContentType.ListAndDetail
         else -> SportsContentType.ListOnly
     }
@@ -108,6 +109,7 @@ fun SportsApp(
                 onClick = {
                     viewModel.updateCurrentSport(it)
                 },
+                onBackPressed = onBackPressed,
                 contentPadding = innerPadding,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -119,7 +121,7 @@ fun SportsApp(
                         viewModel.updateCurrentSport(it)
                         viewModel.navigateToDetailPage()
                     },
-                    modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium)),
+                    modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.padding_medium)),
                     contentPadding = innerPadding,
                 )
             } else {
@@ -267,7 +269,7 @@ private fun SportsList(
     LazyColumn(
         contentPadding = contentPadding,
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
-        modifier = modifier,
+        modifier = modifier.padding(top = dimensionResource(R.dimen.padding_medium)),
     ) {
         items(sports, key = { sport -> sport.id }) { sport ->
             SportsListItem(
@@ -370,6 +372,7 @@ private fun SportsListAndDetail(
     sports: List<Sport>,
     selectedSport: Sport,
     onClick: (Sport) -> Unit,
+    onBackPressed: () -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
@@ -382,14 +385,14 @@ private fun SportsListAndDetail(
             contentPadding = contentPadding,
             modifier = Modifier
                 .weight(2f)
-                .padding(dimensionResource(R.dimen.padding_medium))
+                .padding(horizontal = dimensionResource(R.dimen.padding_medium))
         )
-        val activity = (LocalContext.current as Activity)
+        //val activity = (LocalContext.current as Activity)
         SportsDetail(
             selectedSport = selectedSport,
             modifier = Modifier.weight(3f),
             contentPadding = contentPadding,
-            onBackPressed = { activity.finish() }
+            onBackPressed = onBackPressed,
         )
     }
 }
@@ -418,7 +421,7 @@ fun SportsListPreview() {
     }
 }
 
-@Preview
+@Preview(device = Devices.TABLET)
 @Composable
 fun SportsListAndDetailsPreview() {
     SportsTheme {
@@ -429,7 +432,7 @@ fun SportsListAndDetailsPreview() {
                     LocalSportsDataProvider.defaultSport
                 },
                 onClick = {},
-                modifier = Modifier.fillMaxWidth()
+                onBackPressed = {},
             )
         }
     }
