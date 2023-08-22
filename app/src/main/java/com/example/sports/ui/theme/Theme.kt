@@ -21,10 +21,10 @@ import android.os.Build
 import android.view.View
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
@@ -139,10 +139,10 @@ private fun setUpEdgeToEdge(view: View, darkTheme: Boolean) {
         Build.VERSION.SDK_INT >= 29 -> Color.Transparent.toArgb()
         Build.VERSION.SDK_INT >= 26 -> Color(0xFF, 0xFF, 0xFF, 0x63).toArgb()
         // Min sdk version for this app is 24, this block is for SDK versions 24 and 25
-        else -> Color(0x00,0x00, 0x00, 0x50).toArgb()
+        else -> Color(0x00, 0x00, 0x00, 0x50).toArgb()
     }
     window.navigationBarColor = navigationBarColor
     val controller = WindowCompat.getInsetsController(window, view)
-    controller.isAppearanceLightStatusBars = !darkTheme
+    controller.isAppearanceLightStatusBars = darkTheme
     controller.isAppearanceLightNavigationBars = !darkTheme
 }
