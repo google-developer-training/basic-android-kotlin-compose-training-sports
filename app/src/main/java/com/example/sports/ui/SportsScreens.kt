@@ -326,7 +326,6 @@ private fun SportsDetail(
                             )
                         )
                 ) {
-
                     Text(
                         text = stringResource(selectedSport.titleResourceId),
                         style = MaterialTheme.typography.headlineLarge,
@@ -387,7 +386,6 @@ private fun SportsListAndDetail(
                 .weight(2f)
                 .padding(horizontal = dimensionResource(R.dimen.padding_medium))
         )
-        //val activity = (LocalContext.current as Activity)
         SportsDetail(
             selectedSport = selectedSport,
             modifier = Modifier.weight(3f),
