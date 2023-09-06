@@ -274,7 +274,7 @@ private fun SportsDetail(
             .padding(top = contentPadding.calculateTopPadding())
     ) {
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .padding(
                     bottom = contentPadding.calculateTopPadding(),
                     start = contentPadding.calculateStartPadding(layoutDirection),
