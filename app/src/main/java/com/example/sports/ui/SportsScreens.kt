@@ -388,7 +388,6 @@ private fun SportsListAndDetail(
             sports = sports,
             onClick = onClick,
             contentPadding = PaddingValues(
-                start = contentPadding.calculateStartPadding(LocalLayoutDirection.current),
                 top = contentPadding.calculateTopPadding(),
             ),
             modifier = Modifier
@@ -399,7 +398,6 @@ private fun SportsListAndDetail(
             selectedSport = selectedSport,
             modifier = Modifier.weight(3f),
             contentPadding = PaddingValues(
-                end = contentPadding.calculateEndPadding(LocalLayoutDirection.current),
                 top = contentPadding.calculateTopPadding(),
             ),
             onBackPressed = onBackPressed,
