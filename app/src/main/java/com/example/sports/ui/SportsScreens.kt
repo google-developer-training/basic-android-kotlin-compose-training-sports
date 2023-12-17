@@ -108,6 +108,7 @@ fun SportsApp(
                 selectedSport = uiState.currentSport,
                 onClick = {
                     viewModel.updateCurrentSport(it)
+                    viewModel.navigateToDetailPage()
                 },
                 onBackPressed = onBackPressed,
                 contentPadding = innerPadding,
