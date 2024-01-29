@@ -381,7 +381,9 @@ private fun SportsListAndDetail(
         SportsList(
             sports = sports,
             onClick = onClick,
-            contentPadding = contentPadding,
+            contentPadding = PaddingValues(
+                top = contentPadding.calculateTopPadding(),
+            ),
             modifier = Modifier
                 .weight(2f)
                 .padding(horizontal = dimensionResource(R.dimen.padding_medium))
@@ -389,7 +391,9 @@ private fun SportsListAndDetail(
         SportsDetail(
             selectedSport = selectedSport,
             modifier = Modifier.weight(3f),
-            contentPadding = contentPadding,
+            contentPadding = PaddingValues(
+                top = contentPadding.calculateTopPadding(),
+            ),
             onBackPressed = onBackPressed,
         )
     }
