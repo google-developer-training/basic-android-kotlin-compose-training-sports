@@ -162,7 +162,7 @@ fun SportsAppBar(
             )
         },
         navigationIcon = {
-            if (!isShowingListPage) {
+            if (isShowingDetailPage) {
                 IconButton(onClick = onBackButtonClick) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
