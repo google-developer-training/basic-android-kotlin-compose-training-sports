@@ -161,8 +161,8 @@ fun SportsAppBar(
                 fontWeight = FontWeight.Bold
             )
         },
-        navigationIcon = if (isShowingDetailPage) {
-            {
+        navigationIcon = {
+            if (isShowingDetailPage) {
                 IconButton(onClick = onBackButtonClick) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
@@ -170,8 +170,6 @@ fun SportsAppBar(
                     )
                 }
             }
-        } else {
-            { Box {} }
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary
